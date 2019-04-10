@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ul {
+  padding: 25px;
+  margin:100px;
+}
+li {
+  margin:30px;
+}
+
+.instagram{
+  font-size: 150%;
+  font-style: oblique;
+  text-align: center;
+  font-color: white;
+
+}
+.instagram img{
+  height: 40px;
+  width:40px;
+}
+
+
+</style>
+  <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <link rel="stylesheet" href="{{url_for('static',filename='bootstrap.min.css')}}">  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> 
+    <script src="{{url_for('jquery')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    
+    
+    
+
+
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <div class="main_logo">
+        <a href="{{url_for('index')}}">
+          <img alt="Logo" src="{{url_for('static',filename='images/logo.png')}}" height=40, width=50></a>
+  </div>
+
+
+<div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="{{url_for('index')}}">Ken's Apple Store</a>
+          
+    </div>
+   
+  <!--Toggle/collapsible button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!--links-->
+  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a href="{{ url_for('iphone')}}" class="nav-link" >iPhone</a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ url_for('ipad')}}" class="nav-link" >iPad</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('imac')}}">Mac</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('accessories')}}">Accessories</a>
+    </li>
+
+
+    
+
+    <!--Dropdown-->
+    <li class="nav-item dropdown" active>
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Support</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="{{url_for('contact')}}">Contact Us</a>
+        <a class="dropdown-item" href="{{url_for('form')}}">Responsive Form</a>
+        <a class="dropdown-item" href="{{url_for('aboutus')}}">About Us</a>
+    </li>
+       
+        
+        
+
+       
+</div>
+
+</li>
+</ul>
+<div class="form-popup" id="myForm">
+  <form action="#" class="form-container">
+
+
+        <ul class="navbar-nav ml-auto" >
+            {% if session["user"]%}
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('logout')}}">Log Out</a> 
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('cart')}}"><img onclick="{{url_for('cart')}}" src="{{url_for('static',filename='images/shoppingcart.png')}}" height=40, width=40>
+                <br>
+                  Shopping Cart</a>
+
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('login')}}">Log In</a>
+
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{url_for('registration')}}">Sign Up</a>
+            </li>
+            {% endif %}
+        </ul>
+  </form>
+    </div>
+</nav>
+
+
+
+{% include "/_flash_message.html" %}
+
+
+
+<div class="mainpage">
+<div class="instagram"><a href="{{url_for('myig')}}"><img alt="iglogo" src="{{url_for('static',filename='images/iglogo.png')}}">
+            <a href="{{url_for('myfb')}}"><img alt="fblogo" src="{{url_for('static',filename='images/fblogo.png')}}">
+</a>
+<br>
+
+<style>
+
+table {
+  font-family: arial, sans-serif;
+  border-width: 1px;
+  border-collapse: collapse;
+  width: 100% !important;
+}
+
+</style>
+<table id="myTable">
+  <tr class="header">
+  <thead>
+    <thead> Shopping Cart</thead>
+  <tr>
+    <th>Model </th>
+    <th>Color</th>
+  <th>Capacity</th>
+    <th>Price</th>
+
+
+  </tr>
+  </thead>
+</table>
+
+<table id="myTable">
+ <tbody>
+
+  
+  <form action="{{url_for('customerorder')}}" method = "POST">
+    {% for row in rows %}
+  <tr>
+    <td width=20%>
+    <input type="text" value="{{row[0]}}" name="model" readonly>
+    </td>
+    <td width=20%>
+    <input type="text" value="{{row[1]}}" name="color" readonly>
+    </td>
+    <td width=20%> 
+      <input type="text" value="{{row[2]}}" name="capacity"  readonly>
+    </td>
+    <td width=20%>
+      <input type="text" value="{{row[3]}}" name="price" readonly>
+    </td>
+  </tr>
+ 
+
+
+
+ {% endfor %}
+<input type="submit" value="Submit Order">
+</tbody>
+
+</form>
+</table>
+</span>
+
+</form>
+
+
+
+
